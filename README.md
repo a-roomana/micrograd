@@ -1,0 +1,1 @@
+please see the Micrograd original. https://github.com/karpathy/micrograd/tree/master
