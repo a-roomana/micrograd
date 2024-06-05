@@ -31,6 +31,11 @@ class Value:
         out = Value(self.data * other.data, children=(self, other), op="*")
 
         def backward():
+            """
+            y = a * b => y = ax
+            dy/da = b
+            dy/db = a
+            """
             self.grad += other.data * out.grad
             other.grad += self.data * out.grad
 
@@ -42,6 +47,15 @@ class Value:
         out = Value(self.data**power.data, children=(self, power), op="**")
 
         def backward():
+            """
+            y = a ^ b
+
+            y = x^b
+            dy/da = b * a ^ (b - 1)
+
+            y = a^x
+            dy/db = a ^ b * ln(a)
+            """
             self.grad += power.data * self.data ** (power.data - 1) * out.grad
             power.grad += np.log(self.data) * self.data**power.data * out.grad
 

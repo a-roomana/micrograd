@@ -31,9 +31,9 @@ class ValueTest(unittest.TestCase):
         cv = av * bv
         cv.backward_children()
 
-        self.assertEqual(cv.data, cv.data)
-        self.assertEqual(av.grad, av.grad)
-        self.assertEqual(bv.grad, bv.grad)
+        self.assertEqual(cv.data, 6.0)
+        self.assertEqual(av.grad, 3.0)
+        self.assertEqual(bv.grad, 2.0)
 
         at = torch.tensor([2.0], requires_grad=True)
         bt = torch.tensor([3.0], requires_grad=True)
@@ -86,7 +86,7 @@ class ValueTest(unittest.TestCase):
 
         self.assertEqual(cv.data, 4.0)
         self.assertEqual(av.grad, 0.5)
-        self.assertEqual(bv.grad, -4.0)
+        self.assertEqual(bv.grad, -2.0)
 
         at = torch.tensor([8.0], requires_grad=True)
         bt = torch.tensor([2.0], requires_grad=True)
